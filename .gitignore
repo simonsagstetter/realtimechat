@@ -1,0 +1,6 @@
+*.pyc
+pycache/
+migrations/
+tests.py
+db.sqlite3
+todo.txt

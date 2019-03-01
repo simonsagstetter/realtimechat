@@ -2,7 +2,7 @@
 {% block page %}
 <div class="card">
   <div class="card-header">
-    Sign In
+    Register
   </div>
   <div class="card-body">
     <form method="post">
@@ -10,14 +10,14 @@
       <div class="form-group">
         {{ form.username.label }}
         {{ form.username }}
-        <div class="alert alert-success" style="display:none;">
-        </div>
-        <div class="alert alert-danger" style="display:none;">
-        </div>
       </div>
       <div class="form-group">
-        {{ form.password.label }}
-        {{ form.password }}
+        {{ form.password1.label }}
+        {{ form.password1 }}
+      </div>
+      <div class="form-group">
+        {{ form.password2.label }}
+        {{ form.password2 }}
       </div>
       {% if form.errors %}
           {% for field in form %}
@@ -38,13 +38,13 @@
           {% endfor %}
       {% endif %}
       <div class="form-group">
-        <button class="btn btn-outline-dark btn-block" type="submit" name="button">Sign In</button>
+        <button class="btn btn-outline-dark btn-block" type="submit" name="button">Register</button>
       </div>
     </form>
   </div>
   <div class="card-footer">
     <div class="text-center">
-        <a class="text-muted" href="{% url 'accounts:register' %}">Register</a>
+      <a class="text-muted" href="{% url 'accounts:signin' %}">Sign In</a>
     </div>
   </div>
 </div>

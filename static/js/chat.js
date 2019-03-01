@@ -1,7 +1,7 @@
 // Global Vars
-chats = document.getElementById('chats');
-chat_name = document.getElementById('chat_name');
-csrftoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+var chats = document.getElementById('chats');
+var chat_name = document.getElementById('chat_name');
+var csrftoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
 // Calls API Function which loads all chats
 loadChats();
@@ -21,6 +21,16 @@ function loadChats() {
         li.innerHTML = "<a href='/" + obj[x].chat_name + "/' target='_self'>" + obj[x].chat_name + "</a><small style='float:right'>" + obj[x].created + "</small>";
         chats.appendChild(li);
       }
+    }
+    else if (this.status == 403) {
+        var error = document.getElementById('error');
+        error.innerHTML = 'You are not allowed to join a chat yet.';
+        error.style.display = "block";
+        chat_name.style.display = "none";
+        chats.style.display = "none";
+        setTimeout(function(){
+            error.style.display = "none";
+        }, 7000);
     }
   }
   xhr.open("GET", "/api/chats/", true);
@@ -69,7 +79,7 @@ function createChat() {
         }
         else if (this.status == 400) {
           var error = document.getElementById('error');
-          error.innerHTML = "Ensure this field has no more than 30 characters.";
+          error.innerHTML = "You have entered invalid data.";
           error.style.display = "block";
           setTimeout(function(){
               error.style.display = "none";

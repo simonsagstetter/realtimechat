@@ -1,8 +1,9 @@
 # Real Time Chat Web Application
-### Still in development
+
+> Status: in development
 
 **Description:**
-A real time web based chat application build with django, djangorestframework, channels and javascript. A logged in user can enter or create chat rooms and communicate with others in real time via websockets.
+A real time chat web application built in django, djangorestframework, channels and native javascript. A user can register and log into the web application. As soon as an admin user gives him the permission is_staff he can join chat rooms and start chatting with other users in the chat room. Only an admin user with the status/permission is_superuser can create chat rooms. The whole communication is implemented via websockets. The messages are sent to an api via javascript and stored in a local db.
 
 **Requirements:**
 * Python libaries...
@@ -36,6 +37,6 @@ A real time web based chat application build with django, djangorestframework, c
 * Open your web browser and got to localhost:8000/
 
 ## Tips:
-> You can navigate to localhost:8000/backdoor/admin and add a normal user (non superuser status) to test the websockets diffrent web browsers
+> You can navigate to localhost:8000/backdoor/admin and also add or remove users
 
-> Windows users can have troubles with missing visual c++ build tools when installing django-channels
+> Windows users have to install visual c++ build tools 2014 to install django channels https://www.microsoft.com/de-de/download/details.aspx?id=48159

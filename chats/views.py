@@ -7,7 +7,10 @@ from django.http import HttpResponseNotFound
 from chats.models import Chat
 
 def index(request):
-    return render(request, 'chats/index.html')
+    if request.user.is_superuser:
+        return render(request, 'chats/admin.html')
+    else:
+        return render(request, 'chats/user.html')
 
 def room(request, room_name):
     chat_list = Chat.objects.all()

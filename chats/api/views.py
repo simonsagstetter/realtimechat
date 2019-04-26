@@ -1,10 +1,13 @@
+import json
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated, BasePermission
+from rest_framework.response import Response
+from rest_framework import status
 
 from chats.models import Chat, Message
 from chats.api.serializers import (
 ChatSerializer,
-MessageSerializer
+MessageSerializer,
 )
 
 class IsSuperUser(BasePermission):
@@ -25,7 +28,18 @@ class ChatAPI(ModelViewSet):
             self.permission_classes = [IsSuperUser, ]
         elif self.action == 'list':
             self.permission_classes = [IsStaff, ]
+        elif self.action == 'destroy':
+            self.permission_classes = [IsSuperUser, ]
         return super(self.__class__, self).get_permissions()
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        id = instance.pk
+        self.perform_destroy(instance)
+        return Response({"detail": id}, status=status.HTTP_200_OK)
+
+    def perform_create(self, serializer):
+        serializer.save(sender=self.request.user)
 
 class MessageAPI(ModelViewSet):
     queryset = Message.objects.all().order_by('-created')

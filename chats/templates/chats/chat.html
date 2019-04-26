@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block page %}
-  <p class="lead">{{ room_name_json }}</p>
+  <p class="lead">You entered chatroom {{ room_name_json }}</p>
   <div class="form-group">
     <input class="form-control" id="chat-message-input" type="text" placeholder="Write Something..." required/>
     {% csrf_token %}

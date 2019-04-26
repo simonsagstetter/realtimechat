@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">Messenger</a>
+  <a class="navbar-brand" href="/">Welcome, {{ request.user.username}}!</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample06" aria-controls="navbarsExample06" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,9 +9,14 @@
       <li class="nav-item">
         <a class="nav-link" href="/">All Chats</a>
       </li>
+      <li class="nav-item">
+        {% if request.user.is_superuser %}
+        <a class="nav-link" href="/backdoor/admin/">Administration</a>
+        {% endif %}
+      </li>
     </ul>
     <div class="form-inline my-2 my-md-0">
-      <a class="btn btn-outline-light" href="/manage/signout/">Sign out</a>
+      <a class="btn btn-outline-light" href="/accounts/signout/">Sign out</a>
     </div>
   </div>
 </nav>

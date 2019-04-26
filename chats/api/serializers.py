@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
 
 from chats.models import Chat, Message
 
@@ -10,8 +9,11 @@ class ChatSerializer(serializers.ModelSerializer):
         model = Chat
         fields = [
             'chat_name',
-            'created'
+            'created',
+            'sender',
+            'receiver'
         ]
+        depth = 1
 
 class MessageSerializer(serializers.ModelSerializer):
     created = serializers.DateTimeField(format='%d.%m.%Y %H:%M', read_only=True)

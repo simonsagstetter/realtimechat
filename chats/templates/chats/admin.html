@@ -1,0 +1,61 @@
+{% extends 'chats/base.html' %}
+{% load static %}
+{% block page %}
+  {% if messages %}
+    {% for message in messages %}
+      <div{% if message.tags %} class="alert alert-{{ message.tags }} text-center"{% endif %}>
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="row">
+    <div class="col-lg-4">
+      <p class="lead">Users</p>
+      <ul id="users">
+      </ul>
+    </div>
+    <div class="col-lg-8">
+      <div class="notifications">
+        <div class="alert alert-danger text-center" id="error" style="display:none;">
+        </div>
+        <div class="alert alert-success text-center" id="success" style="display:none;">
+        </div>
+      </div>
+      <!-- Action bar -->
+      <div class="action-bar">
+          <div id="defaults">
+            <button class="btn btn-dark btn-sm" type="button" onclick="selectAll()">Select All</button>
+            <button class="btn btn-dark btn-sm" type="button" onclick="showInputs()">Create Chat</button>
+          </div>
+          <div id="actions" style="display:none;">
+            <button class="btn btn-dark btn-sm" type="button" onclick="unselectAll()">Unselect All</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteChat()">Delete</button>
+          </div>
+          <div id="inputs" style="display:none;">
+            <button class="btn btn-dark btn-sm" type="button" onclick="hideInputs()">Dismiss</button>
+            <div class="inputs">
+              {% csrf_token %}
+              <input class="form-control form-control-sm" type="text" id="chat_name" maxlength="30" \
+              placeholder="Type in a name to create a chat..." \
+              data-toggle="tooltip" data-placement="bottom" title="Only ascii alphanumeric characters are allowed"/>
+            </div>
+          </div>
+      </div>
+      <div id="spinner">
+        <img src="{% static 'svg/loading.svg' %}" width="150px" heigth="150px"/>
+      </div>
+      <ul id="chats">
+      </ul>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block extrascript %}
+  <script src="{% static 'js/globals.js' %}"></script>
+  <script src="{% static 'js/spinner.js' %}"></script>
+  <script src="{% static 'js/notification.js' %}"></script>
+  <script src="{% static 'js/validate.js' %}"></script>
+  <script src="{% static 'js/admin_chat.js' %}"></script>
+{% endblock %}

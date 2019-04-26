@@ -3,9 +3,11 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Chat(models.Model):
-    chat_name =     models.CharField('Chat name', max_length=30, primary_key=True, default=uuid.uuid4)
+    chat_name =     models.CharField('chat name', max_length=30, primary_key=True, default=uuid.uuid4)
     created =       models.DateTimeField(auto_now_add=True)
-    
+    sender =        models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='Chat.sender+')
+    receiver =      models.ForeignKey(User,on_delete=models.SET_NULL, null=True, related_name='Chat.receiver+')
+
     class Meta:
         verbose_name = "chat"
         verbose_name_plural = "chats"
@@ -21,6 +23,7 @@ class Message(models.Model):
     related_chat =  models.ForeignKey('Chat', on_delete=models.CASCADE, related_name='chats.related_name+')
     created =       models.DateTimeField(auto_now_add=True)
     user =          models.ForeignKey(User, on_delete=models.CASCADE)
+    is_read =       models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "message"

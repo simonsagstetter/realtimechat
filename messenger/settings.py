@@ -139,6 +139,14 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-LOGIN_URL = '/manage/signin/'
+LOGIN_URL = '/accounts/signin/'
 
 LOGIN_REDIRECT_URL = '/'
+
+#Cookies
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+SESSION_COOKIE_AGE = 7200
+
+SESSION_COOKIE_SAMESITE = 'Strict'

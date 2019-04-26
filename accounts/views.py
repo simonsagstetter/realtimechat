@@ -22,7 +22,7 @@ class Signin(LoginView):
     form_class = SigninForm
 
 class Signout(LogoutView):
-    next_page = '/manage/signin/'
+    next_page = '/accounts/signin/'
 
 class Register(TemplateView):
     template_name = 'accounts/register.html'
@@ -40,7 +40,7 @@ class Register(TemplateView):
         form = RegisterForm(request.POST or None)
         if form.is_valid():
             form.save()
-            messages.success(request, "Thanks for registering. You are now logged in.")
+            messages.success(request, "Thanks for registering. You are logged in for now but an admin did not activate you yet.")
             new_user = authenticate(username=form.cleaned_data['username'],
                                     password=form.cleaned_data['password1'],
                                     )

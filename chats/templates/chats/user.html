@@ -1,0 +1,44 @@
+{% extends 'chats/base.html' %}
+{% load static %}
+{% block page %}
+  {% if messages %}
+    {% for message in messages %}
+      <div{% if message.tags %} class="alert alert-{{ message.tags }} text-center"{% endif %}>
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}  
+  <div class="row">
+    <div class="col-lg-4">
+      <p class="lead">Users</p>
+      <ul id="users">
+      </ul>
+    </div>
+    <div class="col-lg-8">
+      <div class="notifications">
+        <div class="alert alert-danger text-center" id="error" style="display:none;">
+        </div>
+        <div class="alert alert-success text-center" id="success" style="display:none;">
+        </div>
+      </div>
+      <!-- Action bar -->
+      <div class="action-bar">
+        <div class="lead">
+          To join a chat, click on a chat in the list below:
+        </div>
+      </div>
+      <div id="spinner">
+        <img src="{% static 'svg/loading.svg' %}" width="150px" heigth="150px"/>
+      </div>
+      <ul id="chats">
+      </ul>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extrascript %}
+  <script src="{% static 'js/globals.js' %}"></script>
+  <script src="{% static 'js/spinner.js' %}"></script>
+  <script src="{% static 'js/notification.js' %}"></script>
+  <script src="{% static 'js/user_chat.js' %}"></script>
+{% endblock %}

@@ -1,6 +1,6 @@
 # Real Time Chat Web Application
 
-> Status: in development
+> Status: deprecated
 
 > Tested on Windows 10 and Linux Ubuntu Desktop 16.04 LTS
 
